@@ -5,6 +5,8 @@ import Assignment from "./types/Assignment";
 import Page from "./types/Page";
 import Module from "./types/Module";
 import { ModuleItem } from "./types/ModuleItem";
+import { CreateQuiz } from "./types/CreateQuiz";
+import { Quiz } from "./types/Quiz";
 
 const formdataHeader = {
     headers: {
@@ -37,7 +39,7 @@ export class Canvas {
             const res = await this.axiosClient.get(`/courses`);
             return res.data as Course[];
         },
-        update: async (courseId: number, course: Course) => {
+        update: async (courseId: number, course: Course): Promise<Course> => {
             const data = Course.toFormData(course);
             const res = await this.axiosClient.put(`/courses/${courseId}`, data, formdataHeader);
             return res.data;
@@ -56,14 +58,14 @@ export class Canvas {
     }
 
     assignmentGroup = {
-        create: async (courseId: number, assignmentGroup: AssignmentGroup) => {
+        create: async (courseId: number, assignmentGroup: AssignmentGroup): Promise<AssignmentGroup> => {
             const res = await this.axiosClient.post(`/courses/${courseId}/assignment_groups`, assignmentGroup);
             return res.data;
         }
     }
 
     assignment = {
-        create: async (courseId: number, assignment: Assignment) => {
+        create: async (courseId: number, assignment: Assignment): Promise<Assignment> => {
             let formData = new FormData();
             formData.append("assignment[name]", assignment.name);
             if (assignment.assignmentGroupId) {
@@ -103,6 +105,14 @@ export class Canvas {
         create: async (courseId: number, moduleId: number, moduleItem: ModuleItem) => {
             const data = ModuleItem.toFormData(moduleItem);
             const res = await this.axiosClient.post(`/courses/${courseId}/modules/${moduleId}/items`, data, formdataHeader);
+            return res.data;
+        }
+    }
+
+    quiz = {
+        create: async (courseId: number, quiz: CreateQuiz): Promise<Quiz> => {
+            const data = quiz.toFormData();
+            const res = await this.axiosClient.post(`/courses/${courseId}/quizzes`, data, formdataHeader);
             return res.data;
         }
     }
