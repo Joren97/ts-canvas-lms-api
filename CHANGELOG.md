@@ -1,5 +1,11 @@
 # ts-canvas-lms-api
 
+## 2.1.1
+
+### Patch Changes
+
+- 0d18edc: Make id mandatory
+
 ## 2.1.0
 
 ### Minor Changes
