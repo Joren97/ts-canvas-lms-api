@@ -1,5 +1,5 @@
 class AssignmentGroup {
-    id?: number
+    id: number
     name: string
     group_weight: number
 
