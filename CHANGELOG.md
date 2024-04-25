@@ -1,5 +1,11 @@
 # ts-canvas-lms-api
 
+## 2.1.0
+
+### Minor Changes
+
+- e665007: Added option to create quiz
+
 ## 2.0.0
 
 ### Major Changes
