@@ -1,10 +1,11 @@
 {
   "name": "ts-canvas-lms-api",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
