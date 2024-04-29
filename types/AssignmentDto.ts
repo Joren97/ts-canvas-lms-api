@@ -1,3 +1,12 @@
+export enum GradingType {
+    PassFail = 'pass_fail',
+    Percent = 'percent',
+    LetterGrade = 'letter_grade',
+    GPA = 'gpa_scale',
+    Points = 'points',
+    NotGraded = 'not_graded'
+}
+
 export interface IAssignmentDto {
     id: number;
     name: string;

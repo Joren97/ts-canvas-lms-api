@@ -7,7 +7,7 @@ import Module from "./types/Module";
 import { ModuleItem } from "./types/ModuleItem";
 import { CreateQuiz } from "./types/CreateQuiz";
 import { Quiz } from "./types/Quiz";
-import { ICreateAssignmentDto, CreateAssignmentDto } from "./types/CreateAssignmentDto";
+import { CreateAssignmentDto } from "./types/CreateAssignmentDto";
 import { ICreateAssignmentGroupDto } from "./types/CreateAssignmentGroupDto";
 
 const formdataHeader = {
@@ -67,14 +67,9 @@ export class Canvas {
     }
 
     assignment = {
-        create: async (courseId: number, assignment: ICreateAssignmentDto): Promise<IAssignmentDto> => {
-            let formData = new FormData();
-            formData.append("assignment[name]", assignment.name);
-            if (assignment.assignmentGroupId) {
-                formData.append("assignment[assignment_group_id]", assignment.assignmentGroupId.toString());
-            }
-
-            const res = await this.axiosClient.post(`/courses/${courseId}/assignments`, formData, formdataHeader);
+        create: async (courseId: number, assignment: CreateAssignmentDto): Promise<IAssignmentDto> => {
+            const data = assignment.toFormData();
+            const res = await this.axiosClient.post(`/courses/${courseId}/assignments`, data, formdataHeader);
             return res.data;
         }
     }
